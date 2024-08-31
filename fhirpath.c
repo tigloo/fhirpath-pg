@@ -514,7 +514,7 @@ Datum
 fhirpath_extract(PG_FUNCTION_ARGS)
 {
 
-	Jsonb       *jb = PG_GETARG_JSONB(0);
+	Jsonb       *jb = PG_GETARG_JSONB_P(0);
 	Fhirpath	*fp_in = PG_GETARG_FHIRPATH(1);
 
 	FhirpathItem	fp;
@@ -665,7 +665,7 @@ PG_FUNCTION_INFO_V1(fhirpath_as_string);
 Datum
 fhirpath_as_string(PG_FUNCTION_ARGS) {
 
-	Jsonb      *jb = PG_GETARG_JSONB(0);
+	Jsonb      *jb = PG_GETARG_JSONB_P(0);
 	Fhirpath   *fp_in = PG_GETARG_FHIRPATH(1);
 	char       *type = text_to_cstring(PG_GETARG_TEXT_P(2));
 
@@ -824,7 +824,7 @@ PG_FUNCTION_INFO_V1(fhirpath_as_token);
 Datum
 fhirpath_as_token(PG_FUNCTION_ARGS) {
 
-	Jsonb      *jb = PG_GETARG_JSONB(0);
+	Jsonb      *jb = PG_GETARG_JSONB_P(0);
 	Fhirpath   *fp_in = PG_GETARG_FHIRPATH(1);
 	char       *type = text_to_cstring(PG_GETARG_TEXT_P(2));
 
@@ -846,7 +846,7 @@ fhirpath_as_token(PG_FUNCTION_ARGS) {
 	long num_results = reduce_fhirpath(&jbv, &fp, &acc, reduce_as_token);
 
 	if (num_results > 0 && acc.acc != NULL)
-		PG_RETURN_ARRAYTYPE_P(makeArrayResult(acc.acc, CurrentMemoryContext));
+		return makeArrayResult(acc.acc, CurrentMemoryContext);
 	else
 		PG_RETURN_NULL();
 }
@@ -897,7 +897,7 @@ PG_FUNCTION_INFO_V1(fhirpath_as_reference);
 Datum
 fhirpath_as_reference(PG_FUNCTION_ARGS) {
 
-	Jsonb      *jb = PG_GETARG_JSONB(0);
+	Jsonb      *jb = PG_GETARG_JSONB_P(0);
 	Fhirpath   *fp_in = PG_GETARG_FHIRPATH(1);
 	char       *type = text_to_cstring(PG_GETARG_TEXT_P(2));
 
@@ -919,7 +919,7 @@ fhirpath_as_reference(PG_FUNCTION_ARGS) {
 	long num_results = reduce_fhirpath(&jbv, &fp, &acc, reduce_as_reference);
 
 	if (num_results > 0 && acc.acc != NULL)
-		PG_RETURN_ARRAYTYPE_P(makeArrayResult(acc.acc, CurrentMemoryContext));
+		return makeArrayResult(acc.acc, CurrentMemoryContext);
 	else
 		PG_RETURN_NULL();
 }
@@ -989,7 +989,7 @@ PG_FUNCTION_INFO_V1(fhirpath_as_number);
 Datum
 fhirpath_as_number(PG_FUNCTION_ARGS) {
 
-	Jsonb      *jb = PG_GETARG_JSONB(0);
+	Jsonb      *jb = PG_GETARG_JSONB_P(0);
 	Fhirpath   *fp_in = PG_GETARG_FHIRPATH(1);
 	char       *type = text_to_cstring(PG_GETARG_TEXT_P(2));
 	MinMax minmax = minmax_from_string(text_to_cstring(PG_GETARG_TEXT_P(3))); 
@@ -1201,7 +1201,7 @@ PG_FUNCTION_INFO_V1(fhirpath_as_date);
 Datum
 fhirpath_as_date(PG_FUNCTION_ARGS) {
 
-	Jsonb      *jb = PG_GETARG_JSONB(0);
+	Jsonb      *jb = PG_GETARG_JSONB_P(0);
 	Fhirpath   *fp_in = PG_GETARG_FHIRPATH(1);
 	char       *type = text_to_cstring(PG_GETARG_TEXT_P(2));
 	MinMax minmax = minmax_from_string(text_to_cstring(PG_GETARG_TEXT_P(3))); 
@@ -1350,7 +1350,7 @@ PG_FUNCTION_INFO_V1(fhirpath_sort_as_text);
 Datum
 fhirpath_sort_as_text(PG_FUNCTION_ARGS) {
 
-	Jsonb      *jb = PG_GETARG_JSONB(0);
+	Jsonb      *jb = PG_GETARG_JSONB_P(0);
 	Fhirpath   *fp_in = PG_GETARG_FHIRPATH(1);
 	char       *type = text_to_cstring(PG_GETARG_TEXT_P(2));
 
@@ -1388,7 +1388,7 @@ PG_FUNCTION_INFO_V1(fhirpath_exists);
 Datum
 fhirpath_exists(PG_FUNCTION_ARGS) {
 
-	Jsonb      *jb = PG_GETARG_JSONB(0);
+	Jsonb      *jb = PG_GETARG_JSONB_P(0);
 	Fhirpath   *fp_in = PG_GETARG_FHIRPATH(1);
 	char       *type = text_to_cstring(PG_GETARG_TEXT_P(2));
 
