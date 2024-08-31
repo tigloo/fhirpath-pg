@@ -12,7 +12,7 @@ typedef struct
 	int32	vl_len_;	/* varlena header (do not touch directly!) */
 } Fhirpath;
 
-#define DatumGetFhirpathP(d)	((Fhirpath*)DatumGetPointer(PG_DETOAST_DATUM(d)))
+#define DatumGetFhirpathP(d)	((Fhirpath*)PG_DETOAST_DATUM(d))
 #define PG_GETARG_FHIRPATH(x)	DatumGetFhirpathP(PG_GETARG_DATUM(x))
 #define PG_RETURN_FHIRPATH(p)	PG_RETURN_POINTER(p)
 
